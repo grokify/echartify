@@ -1,0 +1,318 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/grokify/echartify/schema/chartir.schema.json",
+  "title": "Echartify Chart IR",
+  "description": "A non-polymorphic intermediate representation for Apache ECharts configurations.",
+  "$ref": "#/$defs/ChartIR",
+  "$defs": {
+    "Dataset": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "string",
+                  "number"
+                ]
+              }
+            },
+            "required": [
+              "name",
+              "type"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "id",
+        "columns",
+        "rows"
+      ],
+      "additionalProperties": false
+    },
+    "Mark": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "datasetId": {
+          "type": "string"
+        },
+        "geometry": {
+          "$ref": "#/$defs/Geometry"
+        },
+        "coordinateSystem": {
+          "$ref": "#/$defs/CoordinateSystem"
+        },
+        "encode": {
+          "$ref": "#/$defs/Encode"
+        },
+        "style": {
+          "$ref": "#/$defs/Style"
+        },
+        "stack": {
+          "type": "string"
+        },
+        "smooth": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "datasetId",
+        "geometry",
+        "encode"
+      ],
+      "additionalProperties": false
+    },
+    "Axis": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/AxisType"
+        },
+        "position": {
+          "$ref": "#/$defs/AxisPosition"
+        },
+        "name": {
+          "type": "string"
+        },
+        "min": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "position"
+      ],
+      "additionalProperties": false
+    },
+    "Legend": {
+      "type": "object",
+      "properties": {
+        "show": {
+          "type": "boolean"
+        },
+        "position": {
+          "$ref": "#/$defs/LegendPosition"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tooltip": {
+      "type": "object",
+      "properties": {
+        "show": {
+          "type": "boolean"
+        },
+        "trigger": {
+          "$ref": "#/$defs/TooltipTrigger"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Grid": {
+      "type": "object",
+      "properties": {
+        "left": {
+          "type": "string"
+        },
+        "right": {
+          "type": "string"
+        },
+        "top": {
+          "type": "string"
+        },
+        "bottom": {
+          "type": "string"
+        },
+        "width": {
+          "type": "string"
+        },
+        "height": {
+          "type": "string"
+        },
+        "containLabel": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Style": {
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "string"
+        },
+        "opacity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "borderColor": {
+          "type": "string"
+        },
+        "borderWidth": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "Encode": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "string"
+        },
+        "y": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Geometry": {
+      "type": "string",
+      "enum": [
+        "line",
+        "bar",
+        "pie",
+        "scatter",
+        "area"
+      ]
+    },
+    "CoordinateSystem": {
+      "type": "string",
+      "enum": [
+        "cartesian2d",
+        "polar",
+        "radial"
+      ]
+    },
+    "AxisType": {
+      "type": "string",
+      "enum": [
+        "category",
+        "value",
+        "time",
+        "log"
+      ]
+    },
+    "AxisPosition": {
+      "type": "string",
+      "enum": [
+        "bottom",
+        "top",
+        "left",
+        "right"
+      ]
+    },
+    "LegendPosition": {
+      "type": "string",
+      "enum": [
+        "top",
+        "bottom",
+        "left",
+        "right"
+      ]
+    },
+    "TooltipTrigger": {
+      "type": "string",
+      "enum": [
+        "item",
+        "axis",
+        "none"
+      ]
+    },
+    "ChartIR": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "datasets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Dataset"
+          }
+        },
+        "marks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Mark"
+          }
+        },
+        "axes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Axis"
+          }
+        },
+        "legend": {
+          "$ref": "#/$defs/Legend"
+        },
+        "tooltip": {
+          "$ref": "#/$defs/Tooltip"
+        },
+        "grid": {
+          "$ref": "#/$defs/Grid"
+        }
+      },
+      "required": [
+        "datasets",
+        "marks"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
