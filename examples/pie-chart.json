@@ -1,0 +1,39 @@
+{
+  "title": "Market Share",
+  "datasets": [
+    {
+      "id": "market",
+      "columns": [
+        { "name": "company", "type": "string" },
+        { "name": "share", "type": "number" }
+      ],
+      "rows": [
+        ["Company A", "35"],
+        ["Company B", "28"],
+        ["Company C", "22"],
+        ["Company D", "15"]
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "id": "share-pie",
+      "datasetId": "market",
+      "geometry": "pie",
+      "coordinateSystem": "radial",
+      "encode": {
+        "value": "share",
+        "name": "company"
+      },
+      "name": "Market Share"
+    }
+  ],
+  "legend": {
+    "show": true,
+    "position": "right"
+  },
+  "tooltip": {
+    "show": true,
+    "trigger": "item"
+  }
+}

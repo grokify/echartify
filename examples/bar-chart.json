@@ -1,0 +1,67 @@
+{
+  "title": "Quarterly Performance",
+  "datasets": [
+    {
+      "id": "performance",
+      "columns": [
+        { "name": "quarter", "type": "string" },
+        { "name": "sales", "type": "number" },
+        { "name": "costs", "type": "number" }
+      ],
+      "rows": [
+        ["Q1", "120", "80"],
+        ["Q2", "200", "120"],
+        ["Q3", "150", "100"],
+        ["Q4", "180", "110"]
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "id": "sales-bar",
+      "datasetId": "performance",
+      "geometry": "bar",
+      "encode": {
+        "x": "quarter",
+        "y": "sales"
+      },
+      "name": "Sales",
+      "style": {
+        "color": "#5470c6"
+      }
+    },
+    {
+      "id": "costs-bar",
+      "datasetId": "performance",
+      "geometry": "bar",
+      "encode": {
+        "x": "quarter",
+        "y": "costs"
+      },
+      "name": "Costs",
+      "style": {
+        "color": "#91cc75"
+      }
+    }
+  ],
+  "axes": [
+    {
+      "id": "x",
+      "type": "category",
+      "position": "bottom"
+    },
+    {
+      "id": "y",
+      "type": "value",
+      "position": "left"
+    }
+  ],
+  "legend": {
+    "show": true,
+    "position": "top"
+  },
+  "tooltip": {
+    "show": true,
+    "trigger": "axis"
+  }
+}

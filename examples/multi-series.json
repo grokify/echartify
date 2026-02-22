@@ -1,0 +1,93 @@
+{
+  "title": "Monthly Revenue Analysis",
+  "datasets": [
+    {
+      "id": "revenue",
+      "columns": [
+        { "name": "month", "type": "string" },
+        { "name": "sales", "type": "number" },
+        { "name": "profit", "type": "number" },
+        { "name": "expenses", "type": "number" }
+      ],
+      "rows": [
+        ["Jan", "120", "20", "100"],
+        ["Feb", "200", "45", "155"],
+        ["Mar", "150", "30", "120"],
+        ["Apr", "180", "40", "140"],
+        ["May", "220", "55", "165"],
+        ["Jun", "250", "70", "180"]
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "id": "sales-line",
+      "datasetId": "revenue",
+      "geometry": "line",
+      "encode": {
+        "x": "month",
+        "y": "sales"
+      },
+      "smooth": true,
+      "name": "Sales",
+      "style": {
+        "color": "#5470c6"
+      }
+    },
+    {
+      "id": "profit-bar",
+      "datasetId": "revenue",
+      "geometry": "bar",
+      "encode": {
+        "x": "month",
+        "y": "profit"
+      },
+      "name": "Profit",
+      "style": {
+        "color": "#91cc75",
+        "opacity": 0.8
+      }
+    },
+    {
+      "id": "expenses-area",
+      "datasetId": "revenue",
+      "geometry": "area",
+      "encode": {
+        "x": "month",
+        "y": "expenses"
+      },
+      "name": "Expenses",
+      "style": {
+        "color": "#fac858",
+        "opacity": 0.5
+      }
+    }
+  ],
+  "axes": [
+    {
+      "id": "x",
+      "type": "category",
+      "position": "bottom"
+    },
+    {
+      "id": "y",
+      "type": "value",
+      "position": "left",
+      "name": "Amount ($)"
+    }
+  ],
+  "legend": {
+    "show": true,
+    "position": "top"
+  },
+  "tooltip": {
+    "show": true,
+    "trigger": "axis"
+  },
+  "grid": {
+    "left": "10%",
+    "right": "10%",
+    "bottom": "15%",
+    "containLabel": true
+  }
+}

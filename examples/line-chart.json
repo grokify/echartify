@@ -1,0 +1,53 @@
+{
+  "title": "Weekly Sales Trend",
+  "datasets": [
+    {
+      "id": "sales",
+      "columns": [
+        { "name": "week", "type": "string" },
+        { "name": "revenue", "type": "number" }
+      ],
+      "rows": [
+        ["Week 1", "150"],
+        ["Week 2", "230"],
+        ["Week 3", "224"],
+        ["Week 4", "218"],
+        ["Week 5", "335"],
+        ["Week 6", "410"]
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "id": "revenue-line",
+      "datasetId": "sales",
+      "geometry": "line",
+      "encode": {
+        "x": "week",
+        "y": "revenue"
+      },
+      "smooth": true,
+      "name": "Revenue",
+      "style": {
+        "color": "#5470c6"
+      }
+    }
+  ],
+  "axes": [
+    {
+      "id": "x",
+      "type": "category",
+      "position": "bottom"
+    },
+    {
+      "id": "y",
+      "type": "value",
+      "position": "left",
+      "name": "Revenue ($)"
+    }
+  ],
+  "tooltip": {
+    "show": true,
+    "trigger": "axis"
+  }
+}
