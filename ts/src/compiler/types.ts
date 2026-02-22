@@ -3,10 +3,18 @@
  * These are simplified versions focused on what we generate.
  */
 
-import type { EChartsOption } from "echarts";
-
-// Re-export EChartsOption for convenience
-export type { EChartsOption };
+// Define our own EChartsOption type to avoid echarts import issues.
+// This covers the subset of options we actually generate.
+export interface EChartsOption {
+  title?: { text?: string; subtext?: string };
+  dataset?: EChartsDataset | EChartsDataset[];
+  series?: Record<string, unknown>[];
+  xAxis?: EChartsAxis | EChartsAxis[];
+  yAxis?: EChartsAxis | EChartsAxis[];
+  legend?: Record<string, unknown>;
+  tooltip?: Record<string, unknown>;
+  grid?: Record<string, unknown>;
+}
 
 // Series types we support
 export type EChartsSeriesType = "line" | "bar" | "pie" | "scatter";

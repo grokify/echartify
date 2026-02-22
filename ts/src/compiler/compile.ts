@@ -2,7 +2,7 @@
  * Compiler: Transforms Chart IR → ECharts Option
  */
 
-import type { EChartsOption } from "echarts";
+import type { EChartsOption } from "./types.js";
 import type {
   ChartIR,
   Dataset,
