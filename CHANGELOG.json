@@ -1,0 +1,51 @@
+{
+  "irVersion": "1.0",
+  "project": "echartify",
+  "repository": "https://github.com/grokify/echartify",
+  "versioning": "semver",
+  "commitConvention": "conventional",
+  "maintainers": ["grokify"],
+  "releases": [
+    {
+      "version": "v0.1.0",
+      "date": "2026-02-21",
+      "highlights": [
+        { "description": "Non-polymorphic JSON IR for Apache ECharts enabling reliable AI-assisted chart generation" },
+        { "description": "TypeScript-first architecture with Zod schemas as source of truth" },
+        { "description": "Dual-language support: TypeScript/JavaScript and Go implementations" }
+      ],
+      "added": [
+        { "description": "ChartIR types for non-polymorphic ECharts configuration (Dataset, Mark, Axis, Legend, Tooltip, Grid)", "commit": "261fe51" },
+        { "description": "TypeScript implementation with Zod schemas for validation", "commit": "b8a6ab2" },
+        { "description": "IR-to-ECharts compiler supporting line, bar, pie, scatter, and area charts", "commit": "b8a6ab2" },
+        { "description": "Go types matching the TypeScript schema definitions", "commit": "261fe51" },
+        { "description": "JSON Schema generation from Zod schemas", "commit": "2123ff4" },
+        { "description": "Embedded JSON Schema in Go via `//go:embed`", "commit": "2123ff4" },
+        { "description": "Example chart definitions: line, bar, pie, multi-series", "commit": "2a5aea7" },
+        { "description": "Interactive browser demo with live chart rendering", "commit": "b8a6ab2" },
+        { "description": "CodeQL SAST security scanning workflow", "commit": "28c08b5" }
+      ],
+      "fixed": [
+        { "description": "Use local EChartsOption type to avoid echarts import issues in CI", "commit": "397d5d7" },
+        { "description": "Add ESLint configuration for TypeScript CI", "commit": "bac9b4a" }
+      ],
+      "documentation": [
+        { "description": "Product Requirements Document (PRD.md) with problem statement and design goals", "commit": "f489fa9" },
+        { "description": "Technical Requirements Document (TRD.md) with architecture overview", "commit": "f489fa9" },
+        { "description": "README with Quick Start, IR Schema Reference, and API documentation", "commit": "f489fa9" },
+        { "description": "Example usage for AI assistant integration", "commit": "f489fa9" }
+      ],
+      "build": [
+        { "description": "Go CI workflow with multi-platform matrix (Go 1.26.x/1.25.x, Linux/macOS/Windows)", "commit": "9a06b69" },
+        { "description": "Go Lint workflow with golangci-lint", "commit": "9a06b69" },
+        { "description": "TypeScript CI workflow with Node.js 20.x/22.x", "commit": "9a06b69" },
+        { "description": "TypeScript Lint workflow with ESLint 9.x flat config", "commit": "bac9b4a" },
+        { "description": "Reusable workflow architecture via grokify/.github", "commit": "9a06b69" }
+      ],
+      "tests": [
+        { "description": "53 TypeScript tests covering schemas, compiler, and examples", "commit": "b8a6ab2" },
+        { "description": "10 Go tests for chartir types and schema embedding", "commit": "261fe51" }
+      ]
+    }
+  ]
+}

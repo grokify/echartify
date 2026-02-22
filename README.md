@@ -433,6 +433,10 @@ func ChartIRSchemaBytes() []byte
 4. Run `npm test` (TypeScript) and `go test ./...` (Go)
 5. Submit a pull request
 
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for version history.
+
 ## License
 
 MIT
