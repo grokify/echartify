@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+*.js
+*.d.ts
+*.js.map
+!vitest.config.ts
+!tsconfig.json
+
+# IDE and editor
+.claude/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test and coverage
+coverage/
+*.lcov
+
+# Environment
+.env
+.env.local
