@@ -33,7 +33,8 @@
         { "description": "Product Requirements Document (PRD.md) with problem statement and design goals", "commit": "f489fa9" },
         { "description": "Technical Requirements Document (TRD.md) with architecture overview", "commit": "f489fa9" },
         { "description": "README with Quick Start, IR Schema Reference, and API documentation", "commit": "f489fa9" },
-        { "description": "Example usage for AI assistant integration", "commit": "f489fa9" }
+        { "description": "Example usage for AI assistant integration", "commit": "f489fa9" },
+        { "description": "MkDocs site with Material theme: Getting Started, Schema Reference, Examples, API Reference, Architecture, Development guides", "commit": "f52644f" }
       ],
       "build": [
         { "description": "Go CI workflow with multi-platform matrix (Go 1.26.x/1.25.x, Linux/macOS/Windows)", "commit": "9a06b69" },
