@@ -24,4 +24,4 @@ on:
 
 jobs:
   lint:
-    uses: grokify/.github/.github/workflows/go-lint.yaml@main
+    uses: grokify/.github/.github/workflows/go-lint.yaml@6ceb5e3107ef08d540cd2cf11dcfc7ac1b4b617b
