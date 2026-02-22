@@ -1,4 +1,4 @@
-# Echartify - Technical Requirements Document
+# EChartify - Technical Requirements Document
 
 ## Architecture Overview
 
@@ -458,7 +458,7 @@ const jsonSchema = zodToJsonSchema(chartIRSchema, {
 const schema = {
   $schema: "http://json-schema.org/draft-07/schema#",
   $id: "https://github.com/grokify/echartify/schema/chartir.schema.json",
-  title: "Echartify Chart IR",
+  title: "EChartify Chart IR",
   description: "A non-polymorphic intermediate representation for Apache ECharts configurations.",
   ...jsonSchema,
 };

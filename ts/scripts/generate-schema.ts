@@ -57,7 +57,7 @@ const jsonSchema = zodToJsonSchema(chartIRSchema as any, {
 const schema = {
   $schema: "https://json-schema.org/draft/2020-12/schema",
   $id: "https://github.com/grokify/echartify/schema/chartir.schema.json",
-  title: "Echartify Chart IR",
+  title: "EChartify Chart IR",
   description:
     "A non-polymorphic intermediate representation for Apache ECharts configurations.",
   ...jsonSchema,

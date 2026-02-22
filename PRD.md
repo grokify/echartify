@@ -1,8 +1,8 @@
-# Echartify - Product Requirements Document
+# EChartify - Product Requirements Document
 
 ## Overview
 
-Echartify is a non-polymorphic JSON Intermediate Representation (IR) for Apache ECharts that enables AI assistants to reliably generate and validate chart configurations.
+EChartify is a non-polymorphic JSON Intermediate Representation (IR) for Apache ECharts that enables AI assistants to reliably generate and validate chart configurations.
 
 ## Problem Statement
 

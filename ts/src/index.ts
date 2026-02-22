@@ -1,5 +1,5 @@
 /**
- * Echartify - A non-polymorphic JSON IR for Apache ECharts
+ * EChartify - A non-polymorphic JSON IR for Apache ECharts
  *
  * This module provides:
  * - Zod schemas for validation (source of truth)

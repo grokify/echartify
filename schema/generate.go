@@ -21,7 +21,7 @@ func main() {
 
 	schema := r.Reflect(&chartir.ChartIR{})
 	schema.ID = "https://github.com/grokify/echartify/schema/chartir.schema.json"
-	schema.Title = "Echartify Chart IR"
+	schema.Title = "EChartify Chart IR"
 	schema.Description = "A non-polymorphic intermediate representation for Apache ECharts configurations."
 
 	data, err := json.MarshalIndent(schema, "", "  ")

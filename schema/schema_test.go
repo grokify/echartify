@@ -24,7 +24,7 @@ func TestChartIRSchemaIsValidJSON(t *testing.T) {
 		t.Error("missing $id property")
 	}
 
-	if data["title"] != "Echartify Chart IR" {
+	if data["title"] != "EChartify Chart IR" {
 		t.Errorf("unexpected title: %v", data["title"])
 	}
 

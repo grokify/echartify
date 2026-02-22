@@ -1,4 +1,4 @@
-# Echartify
+# EChartify
 
 [![Go CI][go-ci-svg]][go-ci-url]
 [![Go Lint][go-lint-svg]][go-lint-url]
@@ -11,7 +11,7 @@
 
 A non-polymorphic JSON Intermediate Representation (IR) for Apache ECharts that enables AI assistants to reliably generate and validate chart configurations.
 
-## Why Echartify?
+## Why EChartify?
 
 Apache ECharts uses a highly polymorphic `option` object where:
 
@@ -19,7 +19,7 @@ Apache ECharts uses a highly polymorphic `option` object where:
 - Fields are context-sensitive with implicit defaults
 - Cross-field dependencies exist (e.g., coordinate systems affect valid fields)
 
-This polymorphism makes it difficult for AI assistants to generate correct configurations. Echartify solves this with:
+This polymorphism makes it difficult for AI assistants to generate correct configurations. EChartify solves this with:
 
 | Feature | Benefit |
 |---------|---------|
@@ -257,7 +257,7 @@ See [`examples/`](examples/) for more complete examples.
 
 ## AI Assistant Integration
 
-Echartify is designed for AI assistants to generate charts reliably:
+EChartify is designed for AI assistants to generate charts reliably:
 
 ```typescript
 import { chartIRSchema, compile } from "@grokify/echartify";

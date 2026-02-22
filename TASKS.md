@@ -1,4 +1,4 @@
-# Echartify Implementation Tasks
+# EChartify Implementation Tasks
 
 ## Overview
 
