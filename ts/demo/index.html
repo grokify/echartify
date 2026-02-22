@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Echartify Demo</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .description {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+    }
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .chart-container {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+    .chart-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .chart {
+      width: 100%;
+      height: 350px;
+    }
+    .ir-toggle {
+      margin-top: 10px;
+    }
+    .ir-toggle button {
+      background: #eee;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .ir-toggle button:hover {
+      background: #ddd;
+    }
+    .ir-code {
+      display: none;
+      margin-top: 10px;
+      background: #f8f8f8;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 11px;
+      max-height: 200px;
+      overflow: auto;
+      white-space: pre-wrap;
+    }
+    .ir-code.visible {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Echartify Demo</h1>
+  <p class="description">
+    Charts compiled from non-polymorphic IR using the Echartify compiler
+  </p>
+
+  <div class="charts-grid" id="charts"></div>
+
+  <script type="module">
+    // Example IR documents (embedded for demo)
+    // Uses typed columns format: columns have {name, type} and rows are string[][]
+    const examples = {
+      "Line Chart": {
+        title: "Weekly Sales Trend",
+        datasets: [{
+          id: "sales",
+          columns: [
+            { name: "week", type: "string" },
+            { name: "revenue", type: "number" }
+          ],
+          rows: [
+            ["Week 1", "150"],
+            ["Week 2", "230"],
+            ["Week 3", "224"],
+            ["Week 4", "218"],
+            ["Week 5", "335"],
+            ["Week 6", "410"]
+          ]
+        }],
+        marks: [{
+          id: "revenue-line",
+          datasetId: "sales",
+          geometry: "line",
+          encode: { x: "week", y: "revenue" },
+          smooth: true,
+          name: "Revenue",
+          style: { color: "#5470c6" }
+        }],
+        axes: [
+          { id: "x", type: "category", position: "bottom" },
+          { id: "y", type: "value", position: "left", name: "Revenue ($)" }
+        ],
+        tooltip: { show: true, trigger: "axis" }
+      },
+
+      "Bar Chart": {
+        title: "Quarterly Performance",
+        datasets: [{
+          id: "performance",
+          columns: [
+            { name: "quarter", type: "string" },
+            { name: "sales", type: "number" },
+            { name: "costs", type: "number" }
+          ],
+          rows: [
+            ["Q1", "120", "80"],
+            ["Q2", "200", "120"],
+            ["Q3", "150", "100"],
+            ["Q4", "180", "110"]
+          ]
+        }],
+        marks: [
+          {
+            id: "sales-bar",
+            datasetId: "performance",
+            geometry: "bar",
+            encode: { x: "quarter", y: "sales" },
+            name: "Sales",
+            style: { color: "#5470c6" }
+          },
+          {
+            id: "costs-bar",
+            datasetId: "performance",
+            geometry: "bar",
+            encode: { x: "quarter", y: "costs" },
+            name: "Costs",
+            style: { color: "#91cc75" }
+          }
+        ],
+        axes: [
+          { id: "x", type: "category", position: "bottom" },
+          { id: "y", type: "value", position: "left" }
+        ],
+        legend: { show: true, position: "top" },
+        tooltip: { show: true, trigger: "axis" }
+      },
+
+      "Pie Chart": {
+        title: "Market Share",
+        datasets: [{
+          id: "market",
+          columns: [
+            { name: "company", type: "string" },
+            { name: "share", type: "number" }
+          ],
+          rows: [
+            ["Company A", "35"],
+            ["Company B", "28"],
+            ["Company C", "22"],
+            ["Company D", "15"]
+          ]
+        }],
+        marks: [{
+          id: "share-pie",
+          datasetId: "market",
+          geometry: "pie",
+          coordinateSystem: "radial",
+          encode: { value: "share", name: "company" },
+          name: "Market Share"
+        }],
+        legend: { show: true, position: "right" },
+        tooltip: { show: true, trigger: "item" }
+      },
+
+      "Multi-Series (Line + Bar + Area)": {
+        title: "Monthly Revenue Analysis",
+        datasets: [{
+          id: "revenue",
+          columns: [
+            { name: "month", type: "string" },
+            { name: "sales", type: "number" },
+            { name: "profit", type: "number" },
+            { name: "expenses", type: "number" }
+          ],
+          rows: [
+            ["Jan", "120", "20", "100"],
+            ["Feb", "200", "45", "155"],
+            ["Mar", "150", "30", "120"],
+            ["Apr", "180", "40", "140"],
+            ["May", "220", "55", "165"],
+            ["Jun", "250", "70", "180"]
+          ]
+        }],
+        marks: [
+          {
+            id: "sales-line",
+            datasetId: "revenue",
+            geometry: "line",
+            encode: { x: "month", y: "sales" },
+            smooth: true,
+            name: "Sales",
+            style: { color: "#5470c6" }
+          },
+          {
+            id: "profit-bar",
+            datasetId: "revenue",
+            geometry: "bar",
+            encode: { x: "month", y: "profit" },
+            name: "Profit",
+            style: { color: "#91cc75", opacity: 0.8 }
+          },
+          {
+            id: "expenses-area",
+            datasetId: "revenue",
+            geometry: "area",
+            encode: { x: "month", y: "expenses" },
+            name: "Expenses",
+            style: { color: "#fac858", opacity: 0.5 }
+          }
+        ],
+        axes: [
+          { id: "x", type: "category", position: "bottom" },
+          { id: "y", type: "value", position: "left", name: "Amount ($)" }
+        ],
+        legend: { show: true, position: "top" },
+        tooltip: { show: true, trigger: "axis" },
+        grid: { left: "10%", right: "10%", bottom: "15%", containLabel: true }
+      }
+    };
+
+    // Simple compiler (mirrors the TypeScript compiler logic)
+    function compile(ir) {
+      const option = {};
+
+      if (ir.title) {
+        option.title = { text: ir.title };
+      }
+
+      if (ir.datasets) {
+        option.dataset = ir.datasets.map(d => {
+          // Extract dimension names from typed columns
+          const dimensions = d.columns.map(col => col.name);
+          // Parse string values to numbers based on column type
+          const source = d.rows.map(row =>
+            row.map((value, colIndex) => {
+              if (value === "") return null;
+              const columnType = d.columns[colIndex]?.type;
+              if (columnType === "number") {
+                const num = parseFloat(value);
+                return isNaN(num) ? null : num;
+              }
+              return value;
+            })
+          );
+          return { id: d.id, dimensions, source };
+        });
+      }
+
+      if (ir.marks) {
+        option.series = ir.marks.map((mark, i) => {
+          const datasetIndex = ir.datasets.findIndex(d => d.id === mark.datasetId);
+          const series = {
+            type: mark.geometry === 'area' ? 'line' : mark.geometry,
+            name: mark.name || mark.id,
+            datasetIndex: datasetIndex >= 0 ? datasetIndex : 0,
+            encode: {}
+          };
+
+          if (mark.encode.x) series.encode.x = mark.encode.x;
+          if (mark.encode.y) series.encode.y = mark.encode.y;
+          if (mark.encode.value) series.encode.value = mark.encode.value;
+          if (mark.encode.name) series.encode.itemName = mark.encode.name;
+
+          if (mark.geometry === 'line' || mark.geometry === 'area') {
+            if (mark.smooth) series.smooth = true;
+            if (mark.style) {
+              series.lineStyle = { color: mark.style.color, opacity: mark.style.opacity };
+              series.itemStyle = { color: mark.style.color, opacity: mark.style.opacity };
+            }
+          }
+
+          if (mark.geometry === 'area') {
+            series.areaStyle = { opacity: mark.style?.opacity ?? 0.7 };
+          }
+
+          if (mark.geometry === 'bar') {
+            if (mark.stack) series.stack = mark.stack;
+            if (mark.style) {
+              series.itemStyle = {
+                color: mark.style.color,
+                opacity: mark.style.opacity,
+                borderColor: mark.style.borderColor,
+                borderWidth: mark.style.borderWidth
+              };
+            }
+          }
+
+          if (mark.geometry === 'pie' && mark.style) {
+            series.itemStyle = { color: mark.style.color };
+          }
+
+          return series;
+        });
+      }
+
+      if (ir.axes) {
+        const xAxes = ir.axes.filter(a => a.position === 'bottom' || a.position === 'top');
+        const yAxes = ir.axes.filter(a => a.position === 'left' || a.position === 'right');
+
+        if (xAxes.length > 0) {
+          option.xAxis = xAxes.length === 1
+            ? { type: xAxes[0].type, name: xAxes[0].name, min: xAxes[0].min, max: xAxes[0].max }
+            : xAxes.map(a => ({ type: a.type, name: a.name, min: a.min, max: a.max }));
+        }
+        if (yAxes.length > 0) {
+          option.yAxis = yAxes.length === 1
+            ? { type: yAxes[0].type, name: yAxes[0].name, min: yAxes[0].min, max: yAxes[0].max }
+            : yAxes.map(a => ({ type: a.type, name: a.name, min: a.min, max: a.max }));
+        }
+      }
+
+      if (ir.legend) {
+        option.legend = { show: ir.legend.show };
+        if (ir.legend.position === 'top') { option.legend.top = 'top'; option.legend.orient = 'horizontal'; }
+        if (ir.legend.position === 'bottom') { option.legend.bottom = 'bottom'; option.legend.orient = 'horizontal'; }
+        if (ir.legend.position === 'left') { option.legend.left = 'left'; option.legend.orient = 'vertical'; }
+        if (ir.legend.position === 'right') { option.legend.right = 'right'; option.legend.orient = 'vertical'; }
+        option.legend.data = ir.legend.items || ir.marks.map(m => m.name || m.id);
+      }
+
+      if (ir.tooltip) {
+        option.tooltip = { show: ir.tooltip.show, trigger: ir.tooltip.trigger };
+      }
+
+      if (ir.grid) {
+        option.grid = {
+          left: ir.grid.left,
+          right: ir.grid.right,
+          top: ir.grid.top,
+          bottom: ir.grid.bottom,
+          containLabel: ir.grid.containLabel
+        };
+      }
+
+      return option;
+    }
+
+    // Render all charts
+    const chartsContainer = document.getElementById('charts');
+
+    Object.entries(examples).forEach(([name, ir]) => {
+      const container = document.createElement('div');
+      container.className = 'chart-container';
+
+      const title = document.createElement('div');
+      title.className = 'chart-title';
+      title.textContent = name;
+
+      const chartDiv = document.createElement('div');
+      chartDiv.className = 'chart';
+
+      const toggle = document.createElement('div');
+      toggle.className = 'ir-toggle';
+      toggle.innerHTML = '<button>Show IR</button>';
+
+      const irCode = document.createElement('pre');
+      irCode.className = 'ir-code';
+      irCode.textContent = JSON.stringify(ir, null, 2);
+
+      toggle.querySelector('button').addEventListener('click', () => {
+        irCode.classList.toggle('visible');
+        toggle.querySelector('button').textContent =
+          irCode.classList.contains('visible') ? 'Hide IR' : 'Show IR';
+      });
+
+      container.appendChild(title);
+      container.appendChild(chartDiv);
+      container.appendChild(toggle);
+      container.appendChild(irCode);
+      chartsContainer.appendChild(container);
+
+      // Compile and render
+      const option = compile(ir);
+      const chart = echarts.init(chartDiv);
+      chart.setOption(option);
+
+      // Handle resize
+      window.addEventListener('resize', () => chart.resize());
+    });
+  </script>
+</body>
+</html>
