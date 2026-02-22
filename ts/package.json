@@ -2,6 +2,7 @@
   "name": "@grokify/echartify",
   "version": "0.1.0",
   "description": "A non-polymorphic JSON IR for Apache ECharts",
+  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -9,7 +10,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "generate:schema": "tsx scripts/generate-schema.ts",
-    "lint": "eslint src --ext .ts",
+    "lint": "eslint src",
     "clean": "rm -rf dist",
     "demo": "npx serve demo"
   },
@@ -28,7 +29,10 @@
     "url": "https://github.com/grokify/echartify"
   },
   "devDependencies": {
+    "@eslint/js": "^9.0.0",
     "@types/node": "^22.0.0",
+    "eslint": "^9.0.0",
+    "typescript-eslint": "^8.0.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.0",
     "typescript": "^5.7.0",
