@@ -131,8 +131,8 @@ func TestAxisHelpers(t *testing.T) {
 
 func TestGeometries(t *testing.T) {
 	geoms := Geometries()
-	if len(geoms) != 5 {
-		t.Errorf("Geometries() returned %d items, want 5", len(geoms))
+	if len(geoms) != 11 {
+		t.Errorf("Geometries() returned %d items, want 11", len(geoms))
 	}
 
 	expected := map[Geometry]bool{
@@ -141,6 +141,12 @@ func TestGeometries(t *testing.T) {
 		GeometryPie:     true,
 		GeometryScatter: true,
 		GeometryArea:    true,
+		GeometryRadar:   true,
+		GeometryFunnel:  true,
+		GeometryGauge:   true,
+		GeometryHeatmap: true,
+		GeometryTreemap: true,
+		GeometrySankey:  true,
 	}
 
 	for _, g := range geoms {

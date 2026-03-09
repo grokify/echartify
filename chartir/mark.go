@@ -14,13 +14,22 @@ const (
 	GeometryPie     Geometry = "pie"
 	GeometryScatter Geometry = "scatter"
 	GeometryArea    Geometry = "area"
+	GeometryRadar   Geometry = "radar"
+	GeometryFunnel  Geometry = "funnel"
+	GeometryGauge   Geometry = "gauge"
+	GeometryHeatmap Geometry = "heatmap"
+	GeometryTreemap Geometry = "treemap"
+	GeometrySankey  Geometry = "sankey"
 )
 
 // JSONSchema implements jsonschema.Schema interface for enum generation.
 func (Geometry) JSONSchema() *jsonschema.Schema {
 	return &jsonschema.Schema{
 		Type: "string",
-		Enum: []any{"line", "bar", "pie", "scatter", "area"},
+		Enum: []any{
+			"line", "bar", "pie", "scatter", "area",
+			"radar", "funnel", "gauge", "heatmap", "treemap", "sankey",
+		},
 	}
 }
 
@@ -32,6 +41,12 @@ func Geometries() []Geometry {
 		GeometryPie,
 		GeometryScatter,
 		GeometryArea,
+		GeometryRadar,
+		GeometryFunnel,
+		GeometryGauge,
+		GeometryHeatmap,
+		GeometryTreemap,
+		GeometrySankey,
 	}
 }
 
@@ -104,7 +119,7 @@ type Encode struct {
 	// Y maps to the y-axis (for Cartesian geometries).
 	Y string `json:"y,omitempty"`
 
-	// Value maps to the primary value (for pie charts, etc.).
+	// Value maps to the primary value (for pie, funnel, gauge, treemap).
 	Value string `json:"value,omitempty"`
 
 	// Name maps to the name/label (for pie chart segments, etc.).
@@ -115,4 +130,19 @@ type Encode struct {
 
 	// Color maps to mark color (for color encoding by data).
 	Color string `json:"color,omitempty"`
+
+	// Category maps to categorical grouping (for pie, funnel, treemap).
+	Category string `json:"category,omitempty"`
+
+	// Indicator maps to radar indicator (for radar charts).
+	Indicator string `json:"indicator,omitempty"`
+
+	// Source maps to source node (for sankey diagrams).
+	Source string `json:"source,omitempty"`
+
+	// Target maps to target node (for sankey diagrams).
+	Target string `json:"target,omitempty"`
+
+	// Heat maps to heat intensity (for heatmaps).
+	Heat string `json:"heat,omitempty"`
 }
