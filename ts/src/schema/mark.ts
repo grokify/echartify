@@ -5,7 +5,19 @@ import { styleSchema } from "./style.js";
  * Geometry defines the visual representation type.
  * This replaces ECharts' polymorphic series.type with a simple enum.
  */
-export const geometrySchema = z.enum(["line", "bar", "pie", "scatter", "area"]);
+export const geometrySchema = z.enum([
+  "line",
+  "bar",
+  "pie",
+  "scatter",
+  "area",
+  "radar",
+  "funnel",
+  "gauge",
+  "heatmap",
+  "treemap",
+  "sankey",
+]);
 export type Geometry = z.infer<typeof geometrySchema>;
 
 /**
@@ -25,7 +37,7 @@ export const encodeSchema = z.object({
   /** Y maps to the y-axis (for Cartesian geometries). */
   y: z.string().optional(),
 
-  /** Value maps to the primary value (for pie charts, etc.). */
+  /** Value maps to the primary value (for pie, funnel, gauge, treemap). */
   value: z.string().optional(),
 
   /** Name maps to the name/label (for pie chart segments, etc.). */
@@ -36,6 +48,21 @@ export const encodeSchema = z.object({
 
   /** Color maps to mark color (for color encoding by data). */
   color: z.string().optional(),
+
+  /** Category maps to categorical grouping (for pie, funnel, treemap). */
+  category: z.string().optional(),
+
+  /** Indicator maps to radar indicator (for radar charts). */
+  indicator: z.string().optional(),
+
+  /** Source maps to source node (for sankey diagrams). */
+  source: z.string().optional(),
+
+  /** Target maps to target node (for sankey diagrams). */
+  target: z.string().optional(),
+
+  /** Heat maps to heat intensity (for heatmaps). */
+  heat: z.string().optional(),
 });
 export type Encode = z.infer<typeof encodeSchema>;
 

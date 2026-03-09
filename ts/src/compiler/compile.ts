@@ -185,6 +185,56 @@ function compileMark(
         };
       }
       break;
+
+    case "radar":
+      // Radar charts need radar component configured separately
+      if (mark.style) {
+        series.itemStyle = compileItemStyle(mark.style);
+        if (mark.style.shape) {
+          // Shape is set on radar component, not series
+        }
+      }
+      if (mark.stack) series.stack = mark.stack;
+      break;
+
+    case "funnel":
+      if (mark.style) {
+        series.itemStyle = compileItemStyle(mark.style);
+        if (mark.style.funnelSort) series.sort = mark.style.funnelSort;
+        if (mark.style.funnelGap !== undefined) series.gap = mark.style.funnelGap;
+        if (mark.style.funnelAlign) series.funnelAlign = mark.style.funnelAlign;
+      }
+      break;
+
+    case "gauge":
+      if (mark.style) {
+        series.itemStyle = compileItemStyle(mark.style);
+        if (mark.style.startAngle !== undefined) series.startAngle = mark.style.startAngle;
+        if (mark.style.endAngle !== undefined) series.endAngle = mark.style.endAngle;
+        if (mark.style.gaugeMin !== undefined) series.min = mark.style.gaugeMin;
+        if (mark.style.gaugeMax !== undefined) series.max = mark.style.gaugeMax;
+      }
+      break;
+
+    case "heatmap":
+      if (mark.style) {
+        series.itemStyle = compileItemStyle(mark.style);
+      }
+      // Heatmap typically needs visualMap component
+      break;
+
+    case "treemap":
+      if (mark.style) {
+        series.itemStyle = compileItemStyle(mark.style);
+      }
+      break;
+
+    case "sankey":
+      if (mark.style) {
+        series.itemStyle = compileItemStyle(mark.style);
+      }
+      // Sankey uses links data structure
+      break;
   }
 
   return series;
@@ -205,6 +255,18 @@ function mapGeometry(geometry: Geometry): string {
       return "scatter";
     case "area":
       return "line"; // Area is line with areaStyle
+    case "radar":
+      return "radar";
+    case "funnel":
+      return "funnel";
+    case "gauge":
+      return "gauge";
+    case "heatmap":
+      return "heatmap";
+    case "treemap":
+      return "treemap";
+    case "sankey":
+      return "sankey";
     default:
       return "line";
   }
