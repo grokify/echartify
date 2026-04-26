@@ -110,6 +110,12 @@ The compiler transforms IR → ECharts options:
 | `pie` | `pie` | Uses value/name encoding |
 | `scatter` | `scatter` | |
 | `area` | `line` | With `areaStyle` |
+| `radar` | `radar` | Uses category/indicator encoding |
+| `funnel` | `funnel` | Uses value/name encoding |
+| `gauge` | `gauge` | Uses value encoding |
+| `heatmap` | `heatmap` | Uses x/y/heat encoding |
+| `treemap` | `treemap` | Uses value encoding |
+| `sankey` | `sankey` | Uses source/target/value encoding |
 
 ### Data Type Coercion
 
@@ -228,5 +234,5 @@ json.Unmarshal(data, &ir)
 
 1. **Multi-axis support** - Charts with multiple Y axes
 2. **Theme integration** - Theme references vs inline styles
-3. **Additional geometries** - Radar, heatmap, treemap
-4. **Go compiler** - Full compilation in Go for backend rendering
+3. **Go compiler** - Full compilation in Go for backend rendering
+4. **Additional geometries** - Boxplot, candlestick, graph, map

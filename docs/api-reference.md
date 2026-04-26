@@ -238,6 +238,12 @@ const (
     GeometryPie     Geometry = "pie"
     GeometryScatter Geometry = "scatter"
     GeometryArea    Geometry = "area"
+    GeometryRadar   Geometry = "radar"
+    GeometryFunnel  Geometry = "funnel"
+    GeometryGauge   Geometry = "gauge"
+    GeometryHeatmap Geometry = "heatmap"
+    GeometryTreemap Geometry = "treemap"
+    GeometrySankey  Geometry = "sankey"
 )
 ```
 

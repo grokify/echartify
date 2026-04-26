@@ -107,23 +107,33 @@ Maps dataset columns to visual properties.
 
 ```typescript
 interface Encode {
-  x?: string;      // X-axis column (Cartesian)
-  y?: string;      // Y-axis column (Cartesian)
-  value?: string;  // Value column (pie)
-  name?: string;   // Name/label column (pie)
-  size?: string;   // Size column (scatter)
-  color?: string;  // Color column
+  x?: string;         // X-axis column (Cartesian)
+  y?: string;         // Y-axis column (Cartesian)
+  value?: string;     // Value column (pie, gauge, funnel)
+  name?: string;      // Name/label column (pie, funnel)
+  size?: string;      // Size column (scatter)
+  color?: string;     // Color column
+  category?: string;  // Category column (radar)
+  indicator?: string; // Indicator column (radar)
+  source?: string;    // Source node (sankey)
+  target?: string;    // Target node (sankey)
+  heat?: string;      // Heat value column (heatmap)
 }
 ```
 
 | Property | Type | Charts | Description |
 |----------|------|--------|-------------|
-| `x` | string | line, bar, scatter, area | X-axis data column |
-| `y` | string | line, bar, scatter, area | Y-axis data column |
-| `value` | string | pie | Numeric value column |
-| `name` | string | pie | Label/name column |
+| `x` | string | line, bar, scatter, area, heatmap | X-axis data column |
+| `y` | string | line, bar, scatter, area, heatmap | Y-axis data column |
+| `value` | string | pie, gauge, funnel, treemap | Numeric value column |
+| `name` | string | pie, funnel | Label/name column |
 | `size` | string | scatter | Point size column |
 | `color` | string | all | Color mapping column |
+| `category` | string | radar | Category/dimension column |
+| `indicator` | string | radar | Indicator values column |
+| `source` | string | sankey | Source node column |
+| `target` | string | sankey | Target node column |
+| `heat` | string | heatmap | Heat intensity column |
 
 ## Style
 
@@ -135,6 +145,18 @@ interface Style {
   opacity?: number;     // 0.0 to 1.0
   borderColor?: string; // Border/stroke color
   borderWidth?: number; // Border/stroke width
+  // Gauge properties
+  gaugeMin?: number;    // Gauge minimum value
+  gaugeMax?: number;    // Gauge maximum value
+  startAngle?: number;  // Gauge start angle (degrees)
+  endAngle?: number;    // Gauge end angle (degrees)
+  // Heatmap properties
+  heatMin?: number;     // Heatmap minimum value
+  heatMax?: number;     // Heatmap maximum value
+  // Funnel properties
+  funnelAlign?: string; // Funnel alignment: "left", "center", "right"
+  funnelSort?: string;  // Funnel sort: "ascending", "descending", "none"
+  funnelGap?: number;   // Gap between funnel segments
 }
 ```
 
@@ -214,6 +236,12 @@ Chart visualization types.
 | `pie` | Pie chart |
 | `scatter` | Scatter plot |
 | `area` | Area chart (line with fill) |
+| `radar` | Radar/spider chart |
+| `funnel` | Funnel chart |
+| `gauge` | Gauge/meter chart |
+| `heatmap` | Heatmap visualization |
+| `treemap` | Treemap chart |
+| `sankey` | Sankey/flow diagram |
 
 ### CoordinateSystem
 
