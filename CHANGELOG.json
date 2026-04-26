@@ -7,6 +7,28 @@
   "maintainers": ["grokify"],
   "releases": [
     {
+      "version": "v0.2.0",
+      "date": "2026-04-26",
+      "highlights": [
+        { "description": "Add 6 new geometry types for advanced chart visualizations: radar, funnel, gauge, heatmap, treemap, sankey" }
+      ],
+      "added": [
+        { "description": "Add `GeometryRadar` for radar/spider charts", "commit": "d74e56b" },
+        { "description": "Add `GeometryFunnel` for funnel charts", "commit": "d74e56b" },
+        { "description": "Add `GeometryGauge` for gauge/meter charts", "commit": "d74e56b" },
+        { "description": "Add `GeometryHeatmap` for heatmap visualizations", "commit": "d74e56b" },
+        { "description": "Add `GeometryTreemap` for treemap charts", "commit": "d74e56b" },
+        { "description": "Add `GeometrySankey` for sankey/flow diagrams", "commit": "d74e56b" },
+        { "description": "Add encode fields: `category`, `indicator`, `source`, `target`, `heat`", "commit": "d74e56b" },
+        { "description": "Add gauge style properties: `GaugeMin`, `GaugeMax`, `StartAngle`, `EndAngle`", "commit": "d74e56b" },
+        { "description": "Add heatmap style properties: `HeatMin`, `HeatMax`", "commit": "d74e56b" },
+        { "description": "Add funnel style properties: `FunnelAlign`, `FunnelSort`, `FunnelGap`", "commit": "d74e56b" }
+      ],
+      "tests": [
+        { "description": "Add tests for all 6 new geometry types", "commit": "d74e56b" }
+      ]
+    },
+    {
       "version": "v0.1.0",
       "date": "2026-02-21",
       "highlights": [
